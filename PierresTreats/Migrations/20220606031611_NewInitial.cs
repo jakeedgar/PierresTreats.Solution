@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PierresTreats.Migrations
 {
-    public partial class Initial : Migration
+    public partial class NewInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,7 +48,7 @@ namespace PierresTreats.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Flavor",
+                name: "Flavors",
                 columns: table => new
                 {
                     FlavorId = table.Column<int>(type: "int", nullable: false)
@@ -57,7 +57,7 @@ namespace PierresTreats.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Flavor", x => x.FlavorId);
+                    table.PrimaryKey("PK_Flavors", x => x.FlavorId);
                 });
 
             migrationBuilder.CreateTable(
@@ -167,7 +167,7 @@ namespace PierresTreats.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Treat",
+                name: "Treats",
                 columns: table => new
                 {
                     TreatId = table.Column<int>(type: "int", nullable: false)
@@ -179,9 +179,9 @@ namespace PierresTreats.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Treat", x => x.TreatId);
+                    table.PrimaryKey("PK_Treats", x => x.TreatId);
                     table.ForeignKey(
-                        name: "FK_Treat_AspNetUsers_UserId",
+                        name: "FK_Treats_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -201,15 +201,15 @@ namespace PierresTreats.Migrations
                 {
                     table.PrimaryKey("PK_TreatFlavor", x => x.TreatFlavorId);
                     table.ForeignKey(
-                        name: "FK_TreatFlavor_Flavor_FlavorId",
+                        name: "FK_TreatFlavor_Flavors_FlavorId",
                         column: x => x.FlavorId,
-                        principalTable: "Flavor",
+                        principalTable: "Flavors",
                         principalColumn: "FlavorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TreatFlavor_Treat_TreatId",
+                        name: "FK_TreatFlavor_Treats_TreatId",
                         column: x => x.TreatId,
-                        principalTable: "Treat",
+                        principalTable: "Treats",
                         principalColumn: "TreatId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -252,11 +252,6 @@ namespace PierresTreats.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Treat_UserId",
-                table: "Treat",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TreatFlavor_FlavorId",
                 table: "TreatFlavor",
                 column: "FlavorId");
@@ -265,6 +260,11 @@ namespace PierresTreats.Migrations
                 name: "IX_TreatFlavor_TreatId",
                 table: "TreatFlavor",
                 column: "TreatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Treats_UserId",
+                table: "Treats",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -291,10 +291,10 @@ namespace PierresTreats.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Flavor");
+                name: "Flavors");
 
             migrationBuilder.DropTable(
-                name: "Treat");
+                name: "Treats");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -9,8 +9,8 @@ using PierresTreats.Models;
 namespace PierresTreats.Migrations
 {
     [DbContext(typeof(PierresTreatsContext))]
-    [Migration("20220603173320_Initial")]
-    partial class Initial
+    [Migration("20220606031844_UpdateAccountsModels")]
+    partial class UpdateAccountsModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -222,7 +222,7 @@ namespace PierresTreats.Migrations
 
                     b.HasKey("FlavorId");
 
-                    b.ToTable("Flavor");
+                    b.ToTable("Flavors");
                 });
 
             modelBuilder.Entity("PierresTreats.Models.Treat", b =>
@@ -247,7 +247,7 @@ namespace PierresTreats.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Treat");
+                    b.ToTable("Treats");
                 });
 
             modelBuilder.Entity("PierresTreats.Models.TreatFlavor", b =>
@@ -333,21 +333,21 @@ namespace PierresTreats.Migrations
 
             modelBuilder.Entity("PierresTreats.Models.TreatFlavor", b =>
                 {
-                    b.HasOne("PierresTreats.Models.Flavor", "Flavor")
+                    b.HasOne("PierresTreats.Models.Flavor", "Flavors")
                         .WithMany("JoinEntities")
                         .HasForeignKey("FlavorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PierresTreats.Models.Treat", "Treat")
+                    b.HasOne("PierresTreats.Models.Treat", "Treats")
                         .WithMany("JoinEntities")
                         .HasForeignKey("TreatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Flavor");
+                    b.Navigation("Flavors");
 
-                    b.Navigation("Treat");
+                    b.Navigation("Treats");
                 });
 
             modelBuilder.Entity("PierresTreats.Models.Flavor", b =>

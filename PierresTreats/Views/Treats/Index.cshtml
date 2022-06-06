@@ -5,14 +5,14 @@
 @using PierresTreats.Models;
 @model IEnumerable<PierresTreats.Models.Treat>
 
-<h1>Treats @User.Identity.Name</h1>
+<h1>@User.Identity.Name.ToUpper() has these Treats:</h1>
 
 @if (Model.Any())
 {
   <ul>
     @foreach (Treat treat in Model)
     {
-      <li>@Html.ActionLink($"{treat.Description}", "Details", new { id = treat.TreatId })</li>
+      <li>@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId })</li>
     }
   </ul>
 } 
