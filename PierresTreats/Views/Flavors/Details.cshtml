@@ -2,7 +2,7 @@
     Layout = "_Layout";
 }
 
-@model  PierresTreats.Models.Flavor
+@model PierresTreats.Models.Flavor
 
 <h2>Flavor Deep Dive</h2>
 <hr />
@@ -18,10 +18,16 @@ else
     <ul>
     @foreach (var join in Model.JoinEntities)
     {
-        <li>@join.Treats.Description</li>
+        <li>@join.Treats.Name</li>
+        @using (Html.BeginForm("DeleteTreat", "Flavors"))
+        {
+            @Html.Hidden("joinId", @join.TreatFlavorId)
+            <input type="submit" value="Delete"/>
+        }        
     }
     </ul>
 }
 
-<p>@Html.ActionLink("Edit This Flavor", "Edit", "Flavors", null, new {@Class="btn btn-primary"})</p>
-<p>@Html.ActionLink("Delete This Flavor", "Delete", "Flavors", null, new {@Class="btn btn-primary"})</p>
+<p>@Html.ActionLink("Add a treat that has this flavor", "AddTreat", new { id = Model.FlavorId }, new {@Class="btn btn-primary"})</p>
+<p>@Html.ActionLink("Edit This Flavor", "Edit", new { id = Model.FlavorId }, new {@Class="btn btn-primary"})</p>
+<p>@Html.ActionLink("Delete This Flavor", "Delete", new { id = Model.FlavorId }, new {@Class="btn btn-primary"})</p>

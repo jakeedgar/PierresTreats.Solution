@@ -11,15 +11,26 @@ namespace PierresTreats.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly PierresTreatsContext _db;
+        // private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        // public HomeController(ILogger<HomeController> logger)
+        // {
+        //     _logger = logger;
+        // }
+
+        public HomeController(PierresTreatsContext db)
         {
-            _logger = logger;
+            _db = db;
         }
 
+        [HttpGet("/")]
         public IActionResult Index()
         {
+            var flavors = _db.Flavors.ToList();
+            var treats = _db.Treats.ToList();
+            ViewBag.Flavors = flavors; 
+            ViewBag.Treats = treats;
             return View();
         }
 

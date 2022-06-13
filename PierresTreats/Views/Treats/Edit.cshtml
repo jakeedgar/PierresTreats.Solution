@@ -13,5 +13,13 @@
   @Html.LabelFor(model => model.Name)
   @Html.EditorFor(model => model.Name)
 
+  @Html.LabelFor(model => model.Description)
+  @Html.EditorFor(model => model.Description)
+
+  @Html.LabelFor(model => model.Price)
+  @Html.EditorFor(model => model.Price)
+
+  @Html.DropDownList("FlavorId")
+
   <input type="submit" value="Save" class="btn btn-primary"/>
 }
